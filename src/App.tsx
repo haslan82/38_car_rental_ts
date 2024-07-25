@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useSearchParams } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import SearchBar from "./components/SearchBar";
@@ -8,24 +8,31 @@ import fetchCars from "./utils/fetchCars";
 import { CarType } from "./utils/types";
 import Warning from "./components/Warning";
 import Card from "./components/Card";
+import LoadMore from "./components/Modal/LoadMore";
+import { fuels, years } from "./utils/constants";
 
 
 const App = () => {
+  const [params] = useSearchParams();
 const [cars, setCars] = useState<CarType[] | null>(null);
 const [isError, setIsError] = useState<boolean>(false);
+const [limit, setLimit] = useState<number>(5);
 
   useEffect (() => {
-    fetchCars()
+
+    const paramsObj = Object.fromEntries(params.entries());
+
+    fetchCars({limit, ...paramsObj})
     .then((data)=> setCars(data))
     .catch(() => setIsError(true));
-  }, []);
+  }, [limit,params]);
 
   //! console.log(isError, cars)
 
   return (
     <div className="min-h-screen text-white bg-[rgb(23,23,23)] ">
 
-      <BrowserRouter>
+      
         <Header />
         <Hero />
         <div className="mt-12 padding-x padding-y max-width">
@@ -35,8 +42,8 @@ const [isError, setIsError] = useState<boolean>(false);
             <div className="home__filters">
               <SearchBar />
               <div className="home__filter-container">
-                <Filter/>
-                <Filter/>
+                <Filter  options={fuels} name="fuel_type" />
+                <Filter  options={years} name="year"/>
               </div>
             </div>
              {/* Araçları Listele 
@@ -64,14 +71,22 @@ const [isError, setIsError] = useState<boolean>(false);
         ):(
           
           cars.length > 1 && (
-          
+          <section>
         
           <div className="home__cars-wrapper">
 {cars.map((car, i)=>(
  <Card car={car} key={i}/>
 ))}
-          </div>
-         
+
+</div>
+
+          <LoadMore 
+          limit={limit}
+          handleClick={() => {
+            setLimit(limit + 5);
+          }}
+          />
+          </section>
           )
         )}
           
@@ -79,7 +94,7 @@ const [isError, setIsError] = useState<boolean>(false);
         </div>
        
 
-      </BrowserRouter>
+      
 
     </div>
   );

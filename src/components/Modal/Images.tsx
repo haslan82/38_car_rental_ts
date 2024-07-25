@@ -9,7 +9,7 @@ const Images = ({car} : {car:CarType}) => {
 {/* Büyük Resim Alanı */}
 
      <div className="w-full h-40 bg-pattern bg-center">
-        <img className="h-full mx-auto object-contain" src={} alt="" />
+        <img className="h-full mx-auto object-contain" src={GenerateImage(car)} alt="" />
      </div>
 
 
@@ -19,15 +19,15 @@ const Images = ({car} : {car:CarType}) => {
 
 
         <div className="rounded flex-1 flex relative h-24 bg-primary-blue-100">
-            <img src="/hero.png" className="h-full mx-auto object-contain min-w-[146px]" alt="" />
+            <img src={GenerateImage(car, "29")} className="h-full mx-auto object-contain min-w-[146px]" alt="" />
         </div>
 
         <div className="rounded flex-1 flex relative h-24 bg-primary-blue-100">
-            <img src="/hero.png" className="h-full mx-auto object-contain min-w-[146px]" alt="" />
+            <img src={GenerateImage(car, "33")} className="h-full mx-auto object-contain min-w-[146px]" alt="" />
         </div>
 
         <div className="rounded flex-1 flex relative h-24 bg-primary-blue-100">
-            <img src="/hero.png" className="h-full mx-auto object-contain min-w-[146px]" alt="" />
+            <img src={GenerateImage(car, "13")} className="h-full mx-auto object-contain min-w-[146px]" alt="" />
         </div>
 
      </div>
