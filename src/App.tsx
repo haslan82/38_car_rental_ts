@@ -6,6 +6,7 @@ import Filter from "./components/Filter";
 import { useEffect, useState } from "react";
 import fetchCars from "./utils/fetchCars";
 import { CarType } from "./utils/types";
+import Warning from "./components/Warning";
 
 
 const App = () => {
@@ -37,8 +38,41 @@ const [isError, setIsError] = useState<boolean>(false);
                 <Filter/>
               </div>
             </div>
+             {/* Araçları Listele 
+        1) Veri null ise > Henüz api'dan cevap gelmemiştir
+         2) isError true ise > API'dan hata gelmiştir
+         3) Veri boş dizi ise > Aranılan kritere uyun veri yoktur
+         4) Veri dolu dizi ise > API'dan araçlar gelmiştir
+        */}
+
+<Warning />
+
+{!cars ? (
+  
+          <Warning>Yükleniyor...</Warning> 
+         
+        ) : isError ? (
+
+          <Warning>Üzgünüz bir sorun oluştu...</Warning> 
+        
+          
+        ) : cars.length < 1 ? (
+          <Warning>Aranılan kritere uygun araç bulunamadı...</Warning> 
+        
+        ):(
+          
+          cars.length > 1 && (
+          
+          <div className="flex justify-center mt-20">
+            <h2 className="font-semibold ">Veriler...</h2>
+          </div>
+          )
+        )}
+          
           </div>
         </div>
+       
+
       </BrowserRouter>
 
     </div>

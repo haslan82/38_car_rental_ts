@@ -11,7 +11,7 @@ const options = {
 
 const fetchCars =async ():Promise<CarType[]>=> {
 
-    const url = 'https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=m5';
+    const url = 'https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=m';
 
 const res = await fetch(url, options);
 
