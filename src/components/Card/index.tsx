@@ -5,6 +5,8 @@ import Button from "../Button";
 import Info from "./Info";
 import { motion } from "framer-motion";
 import Modal from "../Modal";
+import GenerateImage from "../../utils/generateImages";
+
 
 
 
@@ -41,7 +43,7 @@ const Card = ({ car }: Props) => {
       <div className="relative w-full h-40 my-3">
         <img
           className="w-full h-full object-contain"
-          src="/hero.png"
+          src={GenerateImage(car)}
           alt="car"
         />
       </div>

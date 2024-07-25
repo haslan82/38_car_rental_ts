@@ -1,3 +1,4 @@
+import GenerateImage from "../../utils/generateImages"
 import { CarType } from "../../utils/types"
 
 
@@ -8,7 +9,7 @@ const Images = ({car} : {car:CarType}) => {
 {/* Büyük Resim Alanı */}
 
      <div className="w-full h-40 bg-pattern bg-center">
-        <img className="h-full mx-auto object-contain" src="/hero.png" alt="" />
+        <img className="h-full mx-auto object-contain" src={} alt="" />
      </div>
 
 
