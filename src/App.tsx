@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import fetchCars from "./utils/fetchCars";
 import { CarType } from "./utils/types";
 import Warning from "./components/Warning";
+import Card from "./components/Card";
 
 
 const App = () => {
@@ -19,7 +20,7 @@ const [isError, setIsError] = useState<boolean>(false);
     .catch(() => setIsError(true));
   }, []);
 
-  console.log(isError, cars)
+  //! console.log(isError, cars)
 
   return (
     <div className="min-h-screen text-white bg-[rgb(23,23,23)] ">
@@ -45,9 +46,9 @@ const [isError, setIsError] = useState<boolean>(false);
          4) Veri dolu dizi ise > API'dan araçlar gelmiştir
         */}
 
-<Warning />
+  
 
-{!cars ? (
+          {!cars ? (
   
           <Warning>Yükleniyor...</Warning> 
          
@@ -57,15 +58,20 @@ const [isError, setIsError] = useState<boolean>(false);
         
           
         ) : cars.length < 1 ? (
+
           <Warning>Aranılan kritere uygun araç bulunamadı...</Warning> 
         
         ):(
           
           cars.length > 1 && (
           
-          <div className="flex justify-center mt-20">
-            <h2 className="font-semibold ">Veriler...</h2>
+        
+          <div className="home__cars-wrapper">
+{cars.map((car, i)=>(
+ <Card car={car} key={i}/>
+))}
           </div>
+         
           )
         )}
           
